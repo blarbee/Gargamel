@@ -17,6 +17,7 @@ public class MyMessageListener extends ListenerAdapter {
             CommandContext context = new CommandContext(event.getMessage());
             commandHandler.handleCommand(context);
         }
+
     }
     private static final Emoji straw = Emoji.fromCustom("Strawbewwy", 1130247677154709675L, false);
     public void onMessage(MessageReceivedEvent event) {

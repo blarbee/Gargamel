@@ -1,12 +1,9 @@
 package packages;
 
 import Commands.*;
-import reactions.Reaction;
-import reactions.Strawberry;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 public class CommandHandler {
     private final Map<String, Command> commands = new HashMap<>();

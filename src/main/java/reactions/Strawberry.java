@@ -1,11 +1,10 @@
 package reactions;
 
 import Commands.Command;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import packages.CommandContext;
-public class Strawberry extends ListenerAdapter implements Reaction {
+public class Strawberry extends ListenerAdapter implements Reaction, Command{
     private static final Emoji straw = Emoji.fromCustom("Strawbewwy", 1130247677154709675L, false);
     @Override
     public void execute(CommandContext context) {
