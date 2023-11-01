@@ -14,9 +14,9 @@ public class Strawberry extends ListenerAdapter implements Reaction, Command{
         String name = context.getId();
         System.out.println("straw.java");
 
-        if (id == 688043538088329236L || name.equals(".nwl.") || name.equals("ßõšş")){
+        if (id == 688043538088329236L){
             context.getMessage().addReaction(straw).queue();
-            context.getMessage().reply("hey girlypop<3").queue();
+            context.getMessage().reply("am in str.java").queue();
         }
     }
 
