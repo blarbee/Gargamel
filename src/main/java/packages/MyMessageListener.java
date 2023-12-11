@@ -1,4 +1,5 @@
 package packages;
+import net.dv8tion.jda.api.entities.channel.unions.MessageChannelUnion;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -26,25 +27,34 @@ public class MyMessageListener extends ListenerAdapter {
         if (event.getAuthor().isBot()) return; // Ignore messages from bots
 
         Long id = event.getMessage().getAuthor().getIdLong();
-        String name = event.getAuthor().getName();
+        String name = event.getMember().getEffectiveName();
         String content = event.getMessage().getContentRaw();
         String guild = String.valueOf(event.getGuild());
         String messageContent = event.getMessage().getContentRaw();
+        MessageChannelUnion channel = event.getChannel();
 
-        System.out.println(guild + name + ":" + content);
+        System.out.println(channel + name + ":" + content);
+        BotReact(event);
+        easterEggs(event);
 
-        if (messageContent.startsWith("!")) {
+        if (messageContent.startsWith("-add")){
+            CommandContext context = new CommandContext(event.getMessage());
+            commandHandler.createCommand(context);
+            CommandHandler.handleDynamicCommand(context);
+        }else if (messageContent.startsWith("-")) {
             CommandContext context = new CommandContext(event.getMessage());
             commandHandler.handleCommand(context);
         }
 
-        if(content.equals("mhm")){
-            event.getMessage().reply("*purrrrrs*").queue();
-        }else if(content.equals("yash")){
-            event.getMessage().reply("Someone said Yash!!? I love this guy!! :3").queue();
-        }
 
-        int rand = (int) ((Math.random() * (100 - 1)) + 1);
+
+        if(content.equals("meow")){
+            event.getMessage().reply("||do not tell them i got out||").queue();
+        }
+    }
+    private void BotReact(MessageReceivedEvent event){
+        long id = event.getMessage().getAuthor().getIdLong();
+        int rand = (int) ((Math.random() * (500 - 1)) + 1);
         System.out.println(rand);
 
         if (id == nwl && rand == 1) {
@@ -60,6 +70,37 @@ public class MyMessageListener extends ListenerAdapter {
             event.getMessage().addReaction(shark).queue();
         } else if (id == lapis && rand == 5) {
             event.getMessage().addReaction(upside).queue();
+        } else if (rand == 24){
+            event.getMessage().addReaction(mikeWeird).queue();
+        }
+    }
+
+    private void easterEggs(MessageReceivedEvent event){
+        String content = event.getMessage().getContentRaw();
+        switch (content) {
+                case "meow":
+                    event.getChannel().sendMessage("||do not tell them i escaped||").queue();
+                    break;
+                case "stop":
+                    event.getChannel().sendMessage("Get sharked!!! " + ":shark: :shark: :shark:").queue();
+                    break;
+                case "grr":
+                    event.getChannel().sendMessage("rawr").queue();
+                    break;
+                case "yash":
+                    event.getChannel().sendMessage("Someone said Yash? love this guy, kith kith! meow~").queue();
+                    break;
+                case "-blarb":
+                    event.getChannel().sendMessage("Don't summon her please help me").queue();
+                    break;
+                case "0909Don't summon her please help me":
+                    if(event.getAuthor().isBot()){
+                        long IDmessage = event.getMessageIdLong();
+                    }
+                    break;
+                case "damn":
+                    event.getChannel().sendMessage("damn bruh").queue();
+                    break;
         }
     }
 }
