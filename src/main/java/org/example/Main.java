@@ -1,12 +1,16 @@
 package org.example;
 
-import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.JDA;
-import java.util.EventListener;
-
+import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+
+import org.apache.commons.io.monitor.FileAlterationMonitor;
+import org.apache.commons.io.monitor.FileAlterationObserver;
 import packages.MyMessageListener;
 import reactions.Strawberry;
+
+import java.io.File;
+import java.util.EventListener;
 
 public class Main implements EventListener {
     public static void main(String[] args) throws InterruptedException {
@@ -18,7 +22,6 @@ public class Main implements EventListener {
         onReady(bot);
 
     }
-
         public static void onReady(JDA bot) {
             System.out.println(bot.getSelfUser().getName() + " is online <3");
             // Perform actions or setup here once the bot is ready

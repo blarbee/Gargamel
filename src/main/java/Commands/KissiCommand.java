@@ -5,7 +5,8 @@ import packages.CommandContext;
 public class KissiCommand implements Command{
     public void execute(CommandContext context) {
         String frend = context.getMentionedMember().getAsMention();
-        String auth = context.getMember().getAsMention();
-        context.getMessage().reply(auth + " leaves a lil kissi on " + frend + "'s cheek<3").queue();
+        String author = context.getMember().getAsMention();
+        String action = String.format("%s leaves a lil kissi on %s's cheek<3", frend, author);
+        context.getMessage().reply(action).queue();
     }
 }

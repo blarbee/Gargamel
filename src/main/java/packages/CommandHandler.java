@@ -24,9 +24,11 @@ public class CommandHandler {
         registerCommand("yash", new YashCommand());
         registerCommand("shark", new SharkCommand());
         registerCommand("list", new ListCommand());
-        registerCommand("hug", new HugCommand());
         registerCommand("kissi", new KissiCommand());
-//        registerCommand("slap", new slapCommand());
+        registerCommand("hug", new HugCommand());
+        registerCommand("pocket", new pocketCommand());
+        registerCommand("slap", new slapCommand());
+        
 
 
 
@@ -101,7 +103,6 @@ public class CommandHandler {
         String filePath = directoryPath + fileName;
 
         // Create a Path object
-//        Path path = Paths.get(filePath);
         Path path = Paths.get(directoryPath).resolve(fileName);
 
         try {
@@ -138,8 +139,9 @@ public class CommandHandler {
                     "public class " + commandName + "Command implements Command{\n" +
                     "    public void execute(CommandContext context) {\n" +
                     "        String frend = context.getMentionedMember().getAsMention();\n" +
-                    "        String auth = context.getMember().getAsMention();\n" +
-                    "        context.getMessage().reply(\"" +action+"\").queue();\n" +
+                    "        String author = context.getMember().getAsMention();\n" +
+                    "        String action = String.format(\""+action+"\", frend, author);\n"+
+                    "        context.getMessage().reply(action).queue();\n" +
                     "    }\n" +
                     "}");
             Files.write(path, lines);
@@ -152,7 +154,23 @@ public class CommandHandler {
         }
     }
 
-    private void writeHere(String commandName){
+    private void writeHere(String commandName) throws IOException {
+        String filePath = "/home/nwl/Documents/1/bot/Gargamel/src/main/java/packages/CommandHandler.java";
+        Path path = Paths.get(filePath);
+        // Read all lines from the file into a List
+        List<String> lines = Files.readAllLines(path);
+
+        int lineNumber = 30;
+        if (lineNumber >= 30 && lineNumber <= 50) {
+            // Insert the new content at the specified line
+            lines.add(lineNumber - 1, "\n        registerCommand(\"" +commandName+ "\", new " +commandName+ "Command());");
+            // Write the modified content back to the file
+            Files.write(path, lines);
+
+            System.out.println("Content inserted successfully at line " + lineNumber);
+        } else {
+            System.out.println("Invalid line number. Line number should be between 31 and " + 50);
+        }
 
     }
 
